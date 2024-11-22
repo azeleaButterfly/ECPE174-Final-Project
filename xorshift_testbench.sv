@@ -11,7 +11,7 @@ initial begin
     #150 $monitor("%b, %b", a, x);
     for (int i = 0; i < 32'd4294967295; i++) begin
         #5 a <= a + 32'd1;
-        $fwrite(file, "%d\n, ", x % 4);
+        $fwrite(file, "%d\n, ", x % 4); //for validating that the RNG follows a uniform distribution
     end
     $fclose(file);
     $stop;
