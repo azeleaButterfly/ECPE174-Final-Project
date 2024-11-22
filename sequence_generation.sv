@@ -6,6 +6,7 @@ module sequence_generation(
 
 logic [31:0] val;
 int count = 32'd0;
+logic [31:0] intermed_val;
 rng_generation generator(.clk(clk), .val(val));
 
 //Generate Sequence Here:
@@ -16,10 +17,12 @@ always @(posedge clk) begin
     end else begin
         if (count >= 32'd100) begin
             count <= 32'd0;
-            game_sequence[count] <= val % 4;
+            intermed_val <= val % 4;
+            game_sequence[count] <= intermed_val[1:0];
         end else begin
             count <= count + 32'd1;
-            game_sequence[count] <= val % 4;
+            intermed_val <= val % 4;
+            game_sequence[count] <= intermed_val[1:0];
         end
     end
     
