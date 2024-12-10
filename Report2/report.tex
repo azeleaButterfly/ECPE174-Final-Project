@@ -312,20 +312,20 @@ From there to reduce file size to make computing information on this data easier
     \inputminted{python}{../output_fix.py}
     \caption{Python Script to Reduce the File Size of the Testbench Output}
 \end{figure}
-Questa adds a lot of whitespace into the output file, which adds no extra information but increases the file size dramatically, which is why we need the script in Figure 4. Then to validate that the output is a uniform distribution the fixed output file is run through the following Python code in a Jupyter Notebook.
+Questa adds a lot of whitespace into the output file, which adds no extra information but increases the file size dramatically, which is why we need the script in Figure 4. Running our output file through the script changed the file size from 682.7 MB to 105.0 MB, so a very large reduction in file size. Then to validate that the output is a uniform distribution the fixed output file is run through the following Python code in a Jupyter Notebook.
 \begin{figure}[H]
     \inputminted{python}{../meow.py}
 \end{figure}
-Using that code after simulating around 9.7 million generated values creates the following plot:
+Using that code after simulating around 52.5 million generated values creates the following plot:
 \begin{figure}[H]
     \begin{center}
         \includegraphics[scale=0.5]{images/rng_plot.png}
     \end{center}
 \end{figure}
-From this plot we can see that we get a distribution that is uniform. Looking at the number of times each value (0,1,2,3) occurred we can see that the difference between the number that occurred the most (1) and the one that occurred the least is (0) is 3 which over 9.7 million simulations is very very small
+From this plot we can see that we get a distribution that is uniform. Looking at the number of times each value (0,1,2,3) occurred we can see that the differences in how many times each number is generated is very small
 \begin{figure}[H]
     \begin{Verbatim}[frame=single]
-0: 2428144, 1: 2428147, 2: 2428145, 3: 2428145
+0: 13128782, 1: 13128785, 2: 13128783, 3: 13128783
     \end{Verbatim}
     \caption{Number of Times each Generated Value Occurred in the Simulation}
 \end{figure}
