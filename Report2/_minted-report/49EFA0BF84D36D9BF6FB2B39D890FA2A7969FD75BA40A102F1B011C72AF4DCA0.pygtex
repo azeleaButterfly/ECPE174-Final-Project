@@ -1,0 +1,17 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}Removes excess whitespace from files }
+\PYG{k+kn}{import} \PYG{n+nn}{argparse}
+
+\PYG{k}{def} \PYG{n+nf}{main}\PYG{p}{():}
+    \PYG{n}{parser} \PYG{o}{=} \PYG{n}{argparse}\PYG{o}{.}\PYG{n}{ArgumentParser}\PYG{p}{(}\PYG{n}{prog} \PYG{o}{=} \PYG{l+s+s2}{\PYGZdq{}Questa Output Fix\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{parser}\PYG{o}{.}\PYG{n}{add\PYGZus{}argument}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}\PYGZhy{}\PYGZhy{}input\PYGZsq{}}\PYG{p}{,}\PYG{n+nb}{type}\PYG{o}{=}\PYG{n+nb}{str}\PYG{p}{,}\PYG{n}{help}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}Filename/Path of the Input File\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{args} \PYG{o}{=} \PYG{n}{parser}\PYG{o}{.}\PYG{n}{parse\PYGZus{}args}\PYG{p}{()}
+    \PYG{n}{inFile} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{args}\PYG{o}{.}\PYG{n}{input}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{outFile} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{n}{args}\PYG{o}{.}\PYG{n}{input}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{:(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{args}\PYG{o}{.}\PYG{n}{input}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{4}\PYG{p}{)]} \PYG{o}{+} \PYG{l+s+s2}{\PYGZdq{}\PYGZus{}fixed.txt\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}w\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{line} \PYG{o+ow}{in} \PYG{n}{inFile}\PYG{p}{:}
+        \PYG{n}{newLine} \PYG{o}{=} \PYG{n}{line}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{} \PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{,} \PYG{l+m+mi}{99}\PYG{p}{)}
+        \PYG{n}{newLine} \PYG{o}{=} \PYG{n}{newLine}\PYG{o}{.}\PYG{n}{replace}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}\PYGZdq{}}\PYG{p}{)}
+        \PYG{n}{outFile}\PYG{o}{.}\PYG{n}{write}\PYG{p}{(}\PYG{n}{newLine}\PYG{p}{)}
+    
+\PYG{n}{main}\PYG{p}{()}
+\end{Verbatim}

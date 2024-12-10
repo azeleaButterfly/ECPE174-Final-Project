@@ -1,0 +1,38 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/***************************************************************}
+\PYG{c+cm}{ * SystemVerilog Masterclk clock divider}
+\PYG{c+cm}{ * }
+\PYG{c+cm}{ * Provides framework for clock divider code to step down}
+\PYG{c+cm}{ *  the 50MHz internal clock}
+\PYG{c+cm}{ * Set the XXX value in the define for the appropriate division}
+\PYG{c+cm}{ *}
+\PYG{c+cm}{ * Author: Elizabeth Basha}
+\PYG{c+cm}{ * Date: 09/04/2013}
+\PYG{c+cm}{ */}
+\PYG{+w}{ }
+\PYG{+w}{ }\PYG{k}{module}\PYG{+w}{ }\PYG{n}{clockdiv}\PYG{p}{(}\PYG{k}{input}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{iclk}\PYG{p}{,}
+\PYG{+w}{						}\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{oclk}\PYG{p}{);}
+
+\PYG{+w}{	}\PYG{c+c1}{// define the parameter for number of clock edges to count}
+\PYG{+w}{	}\PYG{k+kt}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{HALF\PYGZus{}OF\PYGZus{}CLK\PYGZus{}CYCLE\PYGZus{}VALUE}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d781250}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// 32Hz}
+
+\PYG{+w}{	}\PYG{c+c1}{// internal variables for clock divider}
+\PYG{+w}{	}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{	}\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{clkstate}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+
+\PYG{+w}{	}\PYG{c+c1}{// generate clock signal}
+\PYG{+w}{	}\PYG{k}{always\PYGZus{}ff}\PYG{+w}{ }\PYG{p}{@(}\PYG{k}{posedge}\PYG{+w}{ }\PYG{n}{iclk}\PYG{p}{)}
+\PYG{+w}{		}\PYG{k}{if}\PYG{p}{(}\PYG{n}{count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{HALF\PYGZus{}OF\PYGZus{}CLK\PYGZus{}CYCLE\PYGZus{}VALUE}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{1}\PYG{p}{))}
+\PYG{+w}{		}\PYG{k}{begin}
+\PYG{+w}{			}\PYG{c+c1}{// we have seen half of a cycle, toggle the clock}
+\PYG{+w}{			}\PYG{n}{count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{			}\PYG{n}{clkstate}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{o}{\PYGZti{}}\PYG{n}{clkstate}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{			}\PYG{n}{count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{			}\PYG{n}{clkstate}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{clkstate}\PYG{p}{;}
+\PYG{+w}{		}\PYG{k}{end}
+\PYG{+w}{		}
+\PYG{+w}{	}\PYG{k}{assign}\PYG{+w}{ }\PYG{n}{oclk}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{clkstate}\PYG{p}{;}
+\PYG{+w}{	}
+\PYG{+w}{ }\PYG{k}{endmodule}
+\end{Verbatim}

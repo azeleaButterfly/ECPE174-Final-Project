@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{;}
+\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{k}{end}
+\end{Verbatim}

@@ -1,0 +1,49 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nl}{ROUND\PYGZus{}PLAY:}
+\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{synced\PYGZus{}keys}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{c+c1}{//Start of round, set subround counter to 0}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{    }\PYG{c+c1}{//If too much time in a round has been taken, lose}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mh}{12\PYGZsq{}hFFF}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}LOST}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{p}{;}
+\PYG{+w}{        }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{    }\PYG{c+c1}{//If Input, Check that input is correct}
+\PYG{+w}{    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{k}{case}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{)}
+\PYG{+w}{            }\PYG{l+m+mb}{4\PYGZsq{}b0001}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b00}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mb}{4\PYGZsq{}b0010}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b01}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mb}{4\PYGZsq{}b0100}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b10}\PYG{p}{;}
+\PYG{+w}{            }\PYG{l+m+mb}{4\PYGZsq{}b1000}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b11}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{default}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{endcase}
+\PYG{+w}{        }\PYG{c+c1}{//Compare against the current value in the sequence}
+\PYG{+w}{        }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{genned\PYGZus{}sequence}\PYG{p}{[}\PYG{n}{subRound}\PYG{p}{])}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{        }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}LOST}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{end}
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{c+c1}{//No Input, Do not increment subRound}
+\PYG{+w}{        }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}\PYG{+w}{                }
+\PYG{+w}{    }\PYG{k}{end}\PYG{+w}{ }
+\PYG{k}{end}
+\end{Verbatim}

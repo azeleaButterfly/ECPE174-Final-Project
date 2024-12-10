@@ -1,0 +1,20 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{xorshift\PYGZus{}testbench}\PYG{p}{();}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{31}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{,}\PYG{n}{x}\PYG{p}{;}
+\PYG{n}{xorshift}\PYG{+w}{ }\PYG{n}{testMod}\PYG{p}{(.}\PYG{n}{a}\PYG{p}{(}\PYG{n}{a}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{x}\PYG{p}{(}\PYG{n}{x}\PYG{p}{));}
+
+\PYG{k}{initial}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{file}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZdl{}}\PYG{n}{fopen}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}./xor\PYGZus{}test\PYGZus{}output.txt\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}w\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZsh{}}\PYG{l+m+mi}{150}\PYG{+w}{ }\PYG{p}{\PYGZdl{}}\PYG{n}{monitor}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}\PYGZpc{}b, \PYGZpc{}b\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{a}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d4294967295}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{p}{\PYGZsh{}}\PYG{l+m+mi}{5}\PYG{+w}{ }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{        }\PYG{c+c1}{//for validating that the RNG follows a uniform distribution}
+\PYG{+w}{        }\PYG{p}{\PYGZdl{}}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZpc{}d}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{, \PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{\PYGZpc{}}\PYG{+w}{ }\PYG{l+m+mi}{4}\PYG{p}{);}\PYG{+w}{ }
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{    }\PYG{p}{\PYGZdl{}}\PYG{n}{fclose}\PYG{p}{(}\PYG{n}{file}\PYG{p}{);}
+\PYG{+w}{    }\PYG{p}{\PYGZdl{}}\PYG{n}{stop}\PYG{p}{;}
+\PYG{k}{end}
+\PYG{k}{endmodule}
+\end{Verbatim}

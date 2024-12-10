@@ -1,0 +1,182 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{game}\PYG{+w}{ }\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{input}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{keys}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{input}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{clk}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{play\PYGZus{}led}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display0}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display1}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display2}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display3}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display4}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display5}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display6}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{o}{:}\PYG{l+m+mi}{6}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{display7}
+\PYG{p}{);}
+
+\PYG{c+cm}{/*External Module Instantiation*/}
+\PYG{n}{sequence\PYGZus{}generation}\PYG{+w}{ }\PYG{n}{sequence\PYGZus{}gen}\PYG{+w}{ }\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{start}\PYG{p}{(}\PYG{n}{start}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{game\PYGZus{}sequence}\PYG{p}{(}\PYG{n}{genned\PYGZus{}sequence}\PYG{p}{));}
+\PYG{n}{clockdiv}\PYG{+w}{ }\PYG{n}{game\PYGZus{}clock}\PYG{p}{(.}\PYG{n}{iclk}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{oclk}\PYG{p}{(}\PYG{n}{game\PYGZus{}clk}\PYG{p}{));}
+\PYG{n}{synchronizer}\PYG{+w}{ }\PYG{n}{key0\PYGZus{}sync}\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{game\PYGZus{}clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{key}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{ctrl}\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]));}
+\PYG{n}{synchronizer}\PYG{+w}{ }\PYG{n}{key1\PYGZus{}sync}\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{game\PYGZus{}clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{key}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{ctrl}\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]));}
+\PYG{n}{synchronizer}\PYG{+w}{ }\PYG{n}{key2\PYGZus{}sync}\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{game\PYGZus{}clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{key}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{ctrl}\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{[}\PYG{l+m+mi}{2}\PYG{p}{]));}
+\PYG{n}{synchronizer}\PYG{+w}{ }\PYG{n}{key3\PYGZus{}sync}\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{game\PYGZus{}clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{key}\PYG{p}{(}\PYG{n}{keys}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{ctrl}\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{p}{]));}
+\PYG{n}{three\PYGZus{}disp\PYGZus{}seven\PYGZus{}seg}\PYG{+w}{ }\PYG{n}{round\PYGZus{}disp}\PYG{p}{(.}\PYG{n}{a}\PYG{p}{(}\PYG{n}{currRound}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display0}\PYG{p}{(}\PYG{n}{display0}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display1}\PYG{p}{(}\PYG{n}{display1}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display2}\PYG{p}{(}\PYG{n}{display2}\PYG{p}{));}
+\PYG{n}{three\PYGZus{}disp\PYGZus{}seven\PYGZus{}seg}\PYG{+w}{ }\PYG{n}{highscore\PYGZus{}disp}\PYG{p}{(.}\PYG{n}{a}\PYG{p}{(}\PYG{n}{high\PYGZus{}score}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display0}\PYG{p}{(}\PYG{n}{display4}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display1}\PYG{p}{(}\PYG{n}{display5}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{display2}\PYG{p}{(}\PYG{n}{display6}\PYG{p}{));}
+
+
+\PYG{c+cm}{/*State Type and Variable Declaration */}
+\PYG{k}{typedef}\PYG{+w}{ }\PYG{k}{enum}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{p}{\PYGZob{}}\PYG{n}{IDLE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}LOST}\PYG{p}{\PYGZcb{}}\PYG{+w}{ }\PYG{n}{State}\PYG{p}{;}
+\PYG{n}{State}\PYG{+w}{ }\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{p}{;}
+\PYG{n}{State}\PYG{+w}{ }\PYG{n}{present\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{p}{;}
+\PYG{n}{State}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{p}{;}
+
+\PYG{c+cm}{/*Variable Declaration*/}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{genned\PYGZus{}sequence}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{];}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{game\PYGZus{}clk}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{round\PYGZus{}clk}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rng\PYGZus{}clk}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{3}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{synced\PYGZus{}keys}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{7}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{high\PYGZus{}score}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{4}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{seq\PYGZus{}disp\PYGZus{}count}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{5\PYGZsq{}b00000}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//How many times to display the led}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{11}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b00}\PYG{p}{;}
+\PYG{c+cm}{/*FSM Logic*/}
+\PYG{k}{always}\PYG{+w}{ }\PYG{p}{@(}\PYG{k}{posedge}\PYG{+w}{ }\PYG{n}{game\PYGZus{}clk}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{k}{case}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{present\PYGZus{}state}\PYG{p}{)}
+\PYG{+w}{        }\PYG{n+nl}{IDLE:}
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{        }\PYG{k}{end}
+\PYG{+w}{        }
+\PYG{+w}{		}\PYG{n+nl}{DISPLAY\PYGZus{}SEQUENCE:}
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{+w}{ }\PYG{o}{||}\PYG{+w}{ }\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{+w}{ }\PYG{p}{)}\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{k}{case}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{genned\PYGZus{}sequence}\PYG{p}{[}\PYG{n}{subRound}\PYG{p}{])}
+\PYG{+w}{                    }\PYG{l+m+mb}{2\PYGZsq{}b00}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0001}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//LEDG0}
+\PYG{+w}{                    }\PYG{l+m+mb}{2\PYGZsq{}b01}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0010}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//LEDG2}
+\PYG{+w}{                    }\PYG{l+m+mb}{2\PYGZsq{}b10}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0100}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//LEDG4}
+\PYG{+w}{                    }\PYG{l+m+mb}{2\PYGZsq{}b11}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b1000}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//LEDG6}
+\PYG{+w}{                    }\PYG{k}{default}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{endcase}
+\PYG{+w}{                }\PYG{n}{seq\PYGZus{}disp\PYGZus{}count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{seq\PYGZus{}disp\PYGZus{}count}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{seq\PYGZus{}disp\PYGZus{}count}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mb}{5\PYGZsq{}b11111}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                    }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{n}{seq\PYGZus{}disp\PYGZus{}count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{5\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                    }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{end}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{        }\PYG{k}{end}
+
+\PYG{+w}{        }\PYG{n+nl}{ROUND\PYGZus{}PLAY:}
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{synced\PYGZus{}keys}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{c+c1}{//Start of round, set subround counter to 0}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{            }\PYG{c+c1}{//If too much time in a round has been taken, lose}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m+mh}{12\PYGZsq{}hFFF}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}LOST}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{p}{;}
+\PYG{+w}{                }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{            }\PYG{c+c1}{//If Input, Check that input is correct}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{k}{case}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{synced\PYGZus{}keys}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{l+m+mb}{4\PYGZsq{}b0001}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b00}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{l+m+mb}{4\PYGZsq{}b0010}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b01}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{l+m+mb}{4\PYGZsq{}b0100}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b10}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{l+m+mb}{4\PYGZsq{}b1000}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{2\PYGZsq{}b11}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{k}{default}\PYG{o}{:}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{endcase}
+\PYG{+w}{                }\PYG{c+c1}{//Compare against the current value in the sequence}
+\PYG{+w}{                }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{user\PYGZus{}input}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{n}{genned\PYGZus{}sequence}\PYG{p}{[}\PYG{n}{subRound}\PYG{p}{])}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                    }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                        }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{                        }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{DISPLAY\PYGZus{}SEQUENCE}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                        }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}PLAY}\PYG{p}{;}
+\PYG{+w}{                    }\PYG{k}{end}
+\PYG{+w}{                }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                    }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{ROUND\PYGZus{}LOST}\PYG{p}{;}
+\PYG{+w}{                }\PYG{k}{end}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{c+c1}{//No Input, Do not increment subRound}
+\PYG{+w}{                }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{subRound}\PYG{p}{;}\PYG{+w}{                }
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{            }
+\PYG{+w}{        }\PYG{k}{end}
+
+
+\PYG{+w}{        }\PYG{n+nl}{ROUND\PYGZus{}LOST:}
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{high\PYGZus{}score}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{high\PYGZus{}score}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{currRound}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{n}{high\PYGZus{}score}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{high\PYGZus{}score}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{            }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{end}
+\PYG{+w}{		}\PYG{k}{default}\PYG{o}{:}\PYG{+w}{ }
+\PYG{+w}{        }\PYG{k}{begin}
+\PYG{+w}{            }\PYG{n}{play\PYGZus{}led}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{key\PYGZus{}leds}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{4\PYGZsq{}b0000}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{next\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{IDLE}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{start}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{subRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{currRound}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{8\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{round\PYGZus{}timer}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{12\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{n}{high\PYGZus{}score}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{high\PYGZus{}score}\PYG{p}{;}
+\PYG{+w}{        }\PYG{k}{end}
+\PYG{+w}{    }\PYG{k}{endcase}
+\PYG{k}{end}
+
+\PYG{k}{always\PYGZus{}ff}\PYG{+w}{ }\PYG{p}{@(}\PYG{k}{negedge}\PYG{+w}{ }\PYG{n}{clk}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{prev\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{present\PYGZus{}state}\PYG{p}{;}
+\PYG{+w}{    }\PYG{n}{present\PYGZus{}state}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{next\PYGZus{}state}\PYG{p}{;}
+\PYG{k}{end}
+
+
+\PYG{k}{always\PYGZus{}comb}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{n}{display7}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{7\PYGZsq{}b1001000}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//Highscore H}
+\PYG{+w}{    }\PYG{n}{display3}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mb}{7\PYGZsq{}b1111010}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{//Round r}
+\PYG{k}{end}
+
+\PYG{k}{endmodule}
+\end{Verbatim}

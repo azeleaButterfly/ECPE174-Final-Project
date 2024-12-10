@@ -1,0 +1,30 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{sequence\PYGZus{}testbench}\PYG{p}{();}
+
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{clk}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mb}{1\PYGZsq{}b0}\PYG{p}{;}
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{game\PYGZus{}sequence}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{100}\PYG{p}{];}
+\PYG{k}{always}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{p}{\PYGZsh{}}\PYG{l+m+mi}{10}\PYG{+w}{ }\PYG{n}{clk}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{o}{\PYGZti{}}\PYG{n}{clk}\PYG{p}{;}
+\PYG{k}{end}
+\PYG{n}{sequence\PYGZus{}generation}\PYG{+w}{ }\PYG{n}{testGame}\PYG{+w}{ }\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{game\PYGZus{}sequence}\PYG{p}{(}\PYG{n}{game\PYGZus{}sequence}\PYG{p}{));}
+
+
+\PYG{k}{initial}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{file}\PYG{p}{;}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{    }\PYG{p}{\PYGZsh{}}\PYG{l+m+mi}{10000}\PYG{+w}{ }\PYG{n}{file}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{\PYGZdl{}}\PYG{n}{fopen}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}./test\PYGZus{}sequences.csv\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}w\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{    }\PYG{k}{for}\PYG{+w}{ }\PYG{p}{(}\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{0}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{l+m+mi}{1000}\PYG{p}{;}\PYG{+w}{ }\PYG{n}{i}\PYG{o}{++}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{        }\PYG{p}{\PYGZsh{}}\PYG{l+m+mi}{25}\PYG{+w}{ }\PYG{k}{if}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{count}\PYG{+w}{ }\PYG{o}{\PYGZgt{}=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d99}\PYG{p}{)}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{p}{\PYGZdl{}}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZpc{}d, \PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{game\PYGZus{}sequence}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]);}
+\PYG{+w}{                }\PYG{p}{\PYGZdl{}}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}}\PYG{l+s+se}{\PYGZbs{}n}\PYG{l+s}{\PYGZdq{}}\PYG{p}{);}
+\PYG{+w}{                }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d0}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}\PYG{+w}{ }\PYG{k}{else}\PYG{+w}{ }\PYG{k}{begin}
+\PYG{+w}{                }\PYG{p}{\PYGZdl{}}\PYG{n}{fwrite}\PYG{p}{(}\PYG{n}{file}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}\PYGZpc{}d, \PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{game\PYGZus{}sequence}\PYG{p}{[}\PYG{n}{count}\PYG{p}{]);}\PYG{+w}{ }
+\PYG{+w}{                }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{\PYGZlt{}=}\PYG{+w}{ }\PYG{n}{count}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{l+m+mi}{32\PYGZsq{}d1}\PYG{p}{;}
+\PYG{+w}{            }\PYG{k}{end}
+\PYG{+w}{    }\PYG{k}{end}
+\PYG{+w}{    }
+\PYG{+w}{    }\PYG{p}{\PYGZdl{}}\PYG{n}{stop}\PYG{p}{;}
+\PYG{k}{end}
+\PYG{k}{endmodule}
+\end{Verbatim}

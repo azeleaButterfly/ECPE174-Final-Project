@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{module}\PYG{+w}{ }\PYG{n}{rng\PYGZus{}generation}\PYG{p}{(}
+\PYG{+w}{    }\PYG{k}{input}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{n}{clk}\PYG{p}{,}
+\PYG{+w}{    }\PYG{k}{output}\PYG{+w}{ }\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{31}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{val}
+\PYG{p}{);}
+
+\PYG{k+kt}{logic}\PYG{+w}{ }\PYG{p}{[}\PYG{l+m+mi}{31}\PYG{o}{:}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{n}{seed}\PYG{p}{;}
+\PYG{n}{seedgenerator}\PYG{+w}{ }\PYG{n}{seeding}\PYG{+w}{ }\PYG{p}{(.}\PYG{n}{clk}\PYG{p}{(}\PYG{n}{clk}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{seed}\PYG{p}{(}\PYG{n}{seed}\PYG{p}{));}
+\PYG{n}{xorshift}\PYG{+w}{ }\PYG{n}{generator}\PYG{p}{(.}\PYG{n}{a}\PYG{p}{(}\PYG{n}{seed}\PYG{p}{),}\PYG{+w}{ }\PYG{p}{.}\PYG{n}{x}\PYG{p}{(}\PYG{n}{val}\PYG{p}{));}
+
+\PYG{k}{endmodule}
+\end{Verbatim}

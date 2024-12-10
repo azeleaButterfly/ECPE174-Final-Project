@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{matplotlib} \PYG{k+kn}{import} \PYG{n}{pyplot} \PYG{k}{as} \PYG{n}{plt}
+\PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{Counter}
+\PYG{n}{dist} \PYG{o}{=} \PYG{n+nb}{open}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}xor\PYGZus{}test\PYGZus{}output\PYGZus{}fixed.txt\PYGZdq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{)}
+\PYG{n}{newdist} \PYG{o}{=} \PYG{p}{[]}
+\PYG{k}{for} \PYG{n}{line} \PYG{o+ow}{in} \PYG{n}{dist}\PYG{p}{:}
+    \PYG{n}{a} \PYG{o}{=} \PYG{n}{line}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{},\PYGZdq{}}\PYG{p}{)}
+    \PYG{k}{for} \PYG{n}{val} \PYG{o+ow}{in} \PYG{n}{a}\PYG{p}{:}
+        \PYG{n}{newdist}\PYG{o}{.}\PYG{n}{append}\PYG{p}{(}\PYG{n+nb}{int}\PYG{p}{(}\PYG{n}{val}\PYG{p}{))}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{hist}\PYG{p}{(}\PYG{n}{newdist}\PYG{p}{,}\PYG{l+m+mi}{4}\PYG{p}{,} \PYG{n}{edgecolor}\PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}black\PYGZsq{}}\PYG{p}{)}
+\PYG{n}{plt}\PYG{o}{.}\PYG{n}{show}\PYG{p}{()}
+\PYG{n}{counts} \PYG{o}{=} \PYG{n}{Counter}\PYG{p}{(}\PYG{n}{newdist}\PYG{p}{)}
+\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{counts}\PYG{p}{)}
+\end{Verbatim}
